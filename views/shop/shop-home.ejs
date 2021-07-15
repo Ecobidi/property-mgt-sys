@@ -1,0 +1,43 @@
+<%- include ('../partials/shop') %>
+
+<div class="row py-4">
+  <div class="col-lg-3">
+    <div class="list-group">
+      <h4 class="list-group-item list-group-item-action active font-weight-bold mb-4 py-4">Categories</h4>
+      <a href="/shop" class="list-group-item list-group-item-action text-primary py-2" style="border: none; background: transparent"><strong>All Categories</strong></a>
+      <% categories.forEach( c => { %>
+        <a href='<%= "/shop?category=" + c.name %>' class="list-group-item list-group-item-action text-primary py-2" style="border: none; background: transparent"><strong><%= c.name %></strong></a>
+      <% }) %>
+    </div>
+  </div>
+
+  <div class="col-lg-9">
+    <div class="row">
+      <div class="col-12">
+        <div class="jumbotron py-4">
+          <h4><%= properties.length %> Property(s) Found</h4>
+        </div>
+      </div>
+      <% properties.forEach(p => { %>
+        <div class="col-4">
+          <div class="shop-product-list-item d-block bg-white">
+            <div class="shop-product-list-item-image">
+              <img src='<%= p.images[0] %>' alt="<%= p.title %>">
+            </div>
+            <div class="badge badge-success mode-badge p-2"><%= p.property_mode %></div>
+            <div class="shop-product-list-item-details">
+              <p class="shop-product-list-item-title font-weight-bold mb-0"><%= p.title %></p>
+              <small class="shop-product-list-item-address"><%= p.address + ", " + p.city %></small>
+              <p class="shop-product-list-item-price mt-2">&#8358; <%= p.price %></p>
+              <div class="mt-1">
+                <a href='<%= "/shop/property/" + p._id %>' class="btn-block btn-sm btn btn-primary">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>
+
+<%- include ('../partials/bottom') %>

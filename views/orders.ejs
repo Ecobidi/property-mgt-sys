@@ -1,0 +1,58 @@
+<%- include ('partials/top') %>
+
+<div class="row">
+<div class="col-12 py-4">
+  <div class="d-flex justify-content-between">
+    <h2>Orders</h2>
+  </div>
+</div>
+
+<div class="col-12 py-4">
+  <form class="form-inline" method="POST" action="/orders">
+    <div class="form-group py-2">
+      <input class="form-control" name="search">
+      <button type="submit" class="btn btn-sm btn-primary">Search</button>
+    </div>
+  </form>
+  <h4 class="mb-0 bg-info py-2 text-white text-center mt-4">List of Orders</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Products</th>
+        <th>D. Address</th>
+        <th><small class="font-weight-bold">Mode of Payment</small></th>
+        <th>Date Ordered</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>        
+    <tbody>
+      <% orders.forEach(o => { %>
+      <tr>
+        <td>
+          <small class="font-weight-bold d-block"><%= o.customer.name %></small>
+          <small class="font-weight-bold">(<%= o.customer.email %>)</small>
+        </td>
+        <td>
+          <% m.properties.forEach(a => { %>
+            <span class="d-block font-weight-bold"><%= o.title %></span>
+          <% }) %>
+        </td>
+        <td><small><%= o.payment_type %></small></td>
+        <td><small><%= o.date_of_order %></small></td>
+        <td>
+          <span class="bg-warning badge badge-pill p-2"><%= o.order_status %></span>
+        </td>
+        <td>
+          <a href='<%= "/orders/confirm?order_id=" + o._id %>' class="btn btn-sm btn-success d-block my-1 text-white">Confirm</a>
+          <a href='<%= "/orders/cancel?order_id=" + o._id %>' class="btn btn-sm btn-warning d-block my-1 text-white">Cancel</a>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<%- include ('partials/bottom') %>

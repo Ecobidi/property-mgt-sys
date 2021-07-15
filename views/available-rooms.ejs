@@ -1,0 +1,68 @@
+<%- include ('partials/top') %>
+  <div class="row space">
+    <div class="col-12 d-flex justify-content-between align-items-center underline pb-2">
+      <h3 class="title">Available Rooms</h3>
+    </div> 
+  </div>
+
+  <div class="row">
+    <form id="search-form" method="GET" action="/rooms/available?" class="form-inline">
+      <div class="form-group mb-4 ml-2">
+        <label class="mx-4">Search For Available Rooms: </label>
+        <input type="number" name="floor" class="form-control mr-2" placeholder="Floor number...">
+        <select class="form-control mr-2" name="room_type">
+          <option></option>
+          <option value="Regular">Regular</option>
+          <option value="Family">Family</option>
+          <option value="VIP">VIP</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+
+    <div class="col-12">
+      <h4 class="font-weight-light text-center text-white bg-primary p-2 m-0 table-top">List of Available Hotel Rooms</h4>
+      <table class="table table-striped">
+        <thead class="font-weight-bold">
+          <tr>
+            <th>Room Number</th>
+            <th>Floor</th>
+            <th>Number of Beds</th>
+            <th>Class</th>
+            <th>Cost Per Night (&#8358;)</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% availableRooms.forEach((m) => { %>
+            <tr>
+              <td><span><%= m.room_number %></span></td>
+              <td><span><%= m.floor %></span></td>
+              <td><span><%= m.number_of_beds %></span></td>
+              <td><span><%= m.room_type %></span></td>
+              <td><span><%= m.cost_per_night %></span></td>
+              <td>
+                <a href='<%= "/rooms/checkin?room_id=" + m._id %>' class="btn btn-sm btn-primary">Proceed to check-in</a>
+              </td>
+            </tr>
+          <% }) %>  
+          
+          <% if (availableRooms.length == 0) { %>
+            <tr>
+            <td colspan="6">
+            <div class="jumbotron bg-default text-center py-4">
+              <h4 class="lead mb-4 text-danger font-weight-bold">No Rooms Found</h4>
+            </div>
+            </td>
+            </tr>
+          <% } %>
+        </tbody>
+        
+      </table>
+    </div>
+  </div>
+</main>
+</div>
+</div> 
+
+<%- include ('partials/bottom') %>
