@@ -19,7 +19,7 @@
     <thead>
       <tr>
         <th>Customer</th>
-        <th>Products</th>
+        <th>Properties</th>
         <th>D. Address</th>
         <th><small class="font-weight-bold">Mode of Payment</small></th>
         <th>Date Ordered</th>
@@ -35,12 +35,12 @@
           <small class="font-weight-bold">(<%= o.customer.email %>)</small>
         </td>
         <td>
-          <% m.properties.forEach(a => { %>
-            <span class="d-block font-weight-bold"><%= o.title %></span>
+          <% o.properties.forEach(p => { %>
+            <span class="d-block font-weight-bold"><%= p.title %></span>
           <% }) %>
         </td>
         <td><small><%= o.payment_type %></small></td>
-        <td><small><%= o.date_of_order %></small></td>
+        <td><small><%= o.date_of_order.toGMTString() %></small></td>
         <td>
           <span class="bg-warning badge badge-pill p-2"><%= o.order_status %></span>
         </td>

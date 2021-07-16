@@ -6,7 +6,7 @@ class OrderController {
       let orders = await OrderService.findAll()
       orders.forEach(o => { 
         o.customer_name = `${o.customer.first_name} ${o.customer.last_name}`
-        o.date_of_order = o.created_at.toGMTString()
+        o.date_of_order = o.date_of_order.toGMTString()
       })
       res.render('orders', {orders})
     } catch (error) {

@@ -11,7 +11,7 @@ body {
 }
 .sidenav {
   width: 237px;
-  background-color: #dddce1 !important;
+  background-color: #0c5460 !important;
 }
 .main-section {
   flex: 1;
@@ -36,7 +36,7 @@ body {
   align-items: center;
   white-space: nowrap;
   padding: 0.75rem 1.937rem 0.75rem 1rem;
-  color: #787878;
+  color: #f8f9fa;
 }
 .nav-item.active .nav-link {
   color: #007bff

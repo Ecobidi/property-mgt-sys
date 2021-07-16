@@ -41,8 +41,9 @@ class ShopController {
   static async getOrdersPage(req, res) {
     try {
       let orders = await OrderService.findByCustomer(req.session.customer._id)
+      console.log(orders[0].properties)
       orders.forEach(o => { 
-        o.date_of_order = o.created_at.toGMTString()
+        o.date_of_order = o.date_of_order.toGMTString()
       })
       res.render('shop/orders', {orders, layout: 'shop-layout'})
     } catch (error) {
@@ -85,14 +86,15 @@ class ShopController {
   static async handleCheckout(req, res) {
     let order_dao = req.body
     order_dao.customer = req.session.customer._id
+    order_dao.customer_name = req.session.customer.last_name + " " + req.session.customer.first_name
     try {
       let cart = await CartService.findCart(req.session.customer._id)
       cart = cart.toObject()
-      order_dao.properties = cart.properties.map(({_id, name, price}) => ({ _id, name, unit_price: price, qty: cart.properties_quantities[_id] }))
+      order_dao.properties = cart.properties.map(({_id, title, price}) => ({ _id, title, price }))
       await OrderService.save(order_dao)
       await CartService.clearCart(req.session.customer._id)
       req.flash('success_msg', 'Order successfully placed')
-      res.redirect('/shop')
+      res.redirect('/shop/orders')
     } catch (error) {
       console.log(error)
       req.flash('error_msg', 'Failed to add item to cart')

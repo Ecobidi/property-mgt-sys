@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
   <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
   <link rel="stylesheet" href="/css/app.css" type="text/css" />
@@ -14,7 +15,10 @@
   <div class="container-fluid">
     <div class="w-100 d-flex justify-content-between align-items-center">
       <div>
+        <% /* %>
         <a class="navbar-brand mr-4" href="/shop"><i class="fa fa-opencart" aria-hidden="true"></i> <%= appname %> </a>
+        <% */ %>
+        <a class="navbar-brand mr-4" href="/shop"> <img src="/images/favicon-96x96.png" class="logo-brand mr-3" alt=""> <%= appname %> </a>
       </div>
       <div style="flex: 100%" class="mx-4">
         <form action="/shop" method="GET">
@@ -43,10 +47,12 @@
 <main class="main">
   <div class="container">
     <div class="row py-4">
+      <div class="col-12">
+        <h2 class="underline pb-2 mb-2">Property Details</h2>
+      </div>
       <div class="col-lg-9 p-4">
         <div class="row">
           <div class="col-12 bg-white p-4 mb-4">
-            <h5 class="my-4">Property Information</h5>
             <h4><%= property.title %></h4>
             <p><%= property.address + ", " + property.city %></p>
             <small>Property ID: <%= property._id %></small>
@@ -61,7 +67,6 @@
                 <div class="mySlides fade">
                   <div class="numbertext">1 / 3</div>
                   <img src='<%= image %>' style="width:100%; height: 444px;">
-                  <div class="text">Caption Text</div>
                 </div>
               <% }) %>
               <!-- Next and previous buttons -->
@@ -90,35 +95,35 @@
             <h5 class="my-4">Features</h5>
             <div class="row">
               <div class="col-4">
-                <div class="d-flex">
-                  <div class="icon-div text-primary display-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon-div text-primary display-4 mr-4">
                     <i class="fa fa-object-group" aria-hidden="true"></i>
                   </div>
-                  <div>
-                    <strong class="d-block">Area</strong>
-                    <span><%= property.size %></span>
+                  <div style="font-size: larger;">
+                    <span class="d-block">Area</span>
+                    <strong><%= property.size %></strong>
                   </div>
                 </div>
               </div>
               <div class="col-4">
-                <div class="d-flex">
-                  <div class="icon-div text-primary display-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon-div text-primary display-4 mr-4">
                     <i class="fa fa-bed" aria-hidden="true"></i>
                   </div>
-                  <div>
-                    <strong class="d-block">Bedrooms</strong>
-                    <span><%= property.bedrooms %></span>
+                  <div style="font-size: larger;">
+                    <span class="d-block">Bedrooms</span>
+                    <strong><%= property.bedrooms %></strong>
                   </div>
                 </div>
               </div>
               <div class="col-4">
-                <div class="d-flex">
-                  <div class="icon-div text-primary display-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon-div text-primary display-4 mr-4">
                     <i class="fa fa-bath" aria-hidden="true"></i>
                   </div>
-                  <div>
-                    <strong class="d-block">Bathrooms</strong>
-                    <span><%= property.bathrooms %></span>
+                  <div style="font-size: larger;">
+                    <span class="d-block">Bathrooms</span>
+                    <strong><%= property.bathrooms %></strong>
                   </div>
                 </div>
               </div>
@@ -131,20 +136,22 @@
       <div class="col-lg-3 p-4">
         <div class="row">
           <div class="col-12 p-3 mb-4 bg-white">
-            <h2 class="text-primary">&#8358; <%= property.price %></h2>
+            <h5 class="mb-4">Buy / Rent</h5>
+            <h3 style="font-style: italic;" class="text-primary">&#8358; <%= property.price %></h3>
+            <h4><%= property.property_mode %></h4>
             <div class="mt-1">
-              <a href='<%= "/shop/cart/add?property_id=" + property._id + "&cart_item_qty=1" %>' class="btn-block btn-sm btn btn-primary">Add to cart</a>
+              <a href='<%= "/shop/cart/add?property_id=" + property._id + "&cart_item_qty=1" %>' class="btn-block btn btn-primary">Add to cart</a>
             </div>
           </div>
 
           <div class="col-12 p-3 p-4 bg-white">
-            <h6>Posted By Agent / Broker</h6>
+            <h5 class="mb-4">Posted By Agent / Broker</h5>
             <div class="display-1">
-              <i class="fa fa-user-times" aria-hidden="true"></i>
+              <i class="fa fa-id-badge" aria-hidden="true"></i>
             </div>
-            <p class="font-weight-bold">Test</p>
-            <p><i class="fa fa-phone" aria-hidden="true"></i> 09093838332</p>
-            <p><i class="fa fa-envelop-o" aria-hidden="true"></i> test@email.com</p>
+            <p class="font-weight-bold lead">Test</p>
+            <p><i class="fa fa-phone mr-2" aria-hidden="true"></i> 09093838332</p>
+            <p><i class="fa fa-envelope mr-2" aria-hidden="true"></i> test@email.com</p>
           </div>
         </div>
       </div>
