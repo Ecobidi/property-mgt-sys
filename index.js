@@ -11,7 +11,17 @@ let { APPNAME, PORT, dbhost, dbport, dbname, sessionsecret, domain, owner_mat_no
 const routes = require('./routes')
 
 // connect to mongodb database
-mongoose.connect(`mongodb://${dbhost}:${dbport}/${dbname}`)
+// mongoose.connect(`mongodb://${dbhost}:${dbport}/${dbname}`)
+
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.qmunc.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+
+try {
+  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  console.log('connected to ' + process.env.DB_NAME + ' database.')
+} catch (error) {
+  console.log('Error connecting to ' + process.env.DB_NAME + ' database.')
+  console.log(error)
+}
 
 // init express App
 let app = express()
@@ -25,8 +35,8 @@ app.use(express.static(__dirname + '/public'))
 app.use(express.static(__dirname + '/uploads'))
 
 // bodyparser middlewares
-app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.json())
 
 // app.use(fileupload())
 
@@ -39,14 +49,14 @@ app.use(expressSession({
 app.use(connectFlash())
 
 app.use((req, res, next) => {
-  req.session.customer = {
-    "_id" : "60ef9ef89c891629dc0f66a0",
-    "email" : "customer1@email.com",
-    "first_name" : "Chinonso",
-    "last_name" : "Ezeh",
-    "password" : "$2a$10$m4GyMcUJVsDuCXvYAWLLJ.dsz4BCCcMzlf5QvMpqAAD0LFg1FFvtS",
-    "__v" : 0
-}
+//   req.session.customer = {
+//     "_id" : "60ef9ef89c891629dc0f66a0",
+//     "email" : "customer1@email.com",
+//     "first_name" : "Chinonso",
+//     "last_name" : "Ezeh",
+//     "password" : "$2a$10$m4GyMcUJVsDuCXvYAWLLJ.dsz4BCCcMzlf5QvMpqAAD0LFg1FFvtS",
+//     "__v" : 0
+// }
 
   res.locals.error_msg = req.flash('error_msg')
   res.locals.success_msg = req.flash('success_msg')
@@ -86,4 +96,4 @@ app.use((req, res, next) => {
 
 app.use('/', routes)
 
-app.listen(PORT, () => { console.log(`${APPNAME} running on port ${PORT}`) })
+app.listen(process.env.PORT, () => { console.log(`${APPNAME} running on port ${process.env.PORT}`) })

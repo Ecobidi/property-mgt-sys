@@ -12,7 +12,7 @@
 	<div class="container-fluid">
 		<div class="row mx-0">
 			<div class="col-lg-4 mx-auto py-4">
-				<div class="p-4 bg-white">
+				<div class="p-4 bg-white text-center">
 					<h3><%= appname %></h3>
 					<h4 class="pt-2 text-center">Admin Login</h4>
 					<div>
@@ -28,14 +28,11 @@
 							</script>
 						<% } %>
 					</div>
-					<form action="/a/login" method="POST" class="pt-3">
+					<form action="/login" method="POST" class="pt-3">
 						<div class="form-group"><input required type="username" name="username" placeholder="Username" class="form-control form-control-lg"></div>
 						<div class="form-group"><input required type="password" name="password" placeholder="Password" class="form-control form-control-lg"></div>
 						<div class="my-3">
 							<button class="btn btn-block btn-primary" type="submit">SIGN IN</button>
-						</div>
-						<div class="text-center mt-4 font-weight-light">
-							Don't have an account? <a href="/c/register" class="text-primary">Create</a>
 						</div>
 					</form>
 				</div>

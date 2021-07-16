@@ -21,7 +21,7 @@ const logout = (req, res) => {
 
 adminRouter.use('/login', LoginRouter)
 
-// adminRouter.use(authorization_middleware)
+adminRouter.use(authorization_middleware)
 
 adminRouter.get('/', (req, res) => res.render('dashboard'))
 
