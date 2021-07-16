@@ -19,6 +19,8 @@ const logout = (req, res) => {
   res.redirect('/login')
 }
 
+adminRouter.use('/shop', ShopRouter)
+
 adminRouter.use('/login', LoginRouter)
 
 adminRouter.use(authorization_middleware)
@@ -35,7 +37,6 @@ adminRouter.use('/properties', PropertyRouter)
 
 adminRouter.use('/orders', OrderRouter)
 
-adminRouter.use('/shop', ShopRouter)
 
 adminRouter.use('/users', UserRouter)
 
