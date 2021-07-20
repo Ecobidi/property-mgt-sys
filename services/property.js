@@ -10,6 +10,10 @@ class PropertyService {
     let pattern = new RegExp(title, 'ig')
     return PropertyModel.find({title: pattern})
   }
+
+  static async findByCategory(category) {
+    return PropertyModel.find({category}).sort('-_id').exec()
+  }
   
   static async findAll(params = {}) {
     return PropertyModel.find(params)
